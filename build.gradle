@@ -6,29 +6,29 @@ repositories {
 }
 
 dependencies {
-	compile "commons-collections:commons-collections:3.2"
-	compile "log4j:log4j:1.2.16"
+	compile "log4j:log4j:1.2.17"
+	providedCompile "tomcat:catalina:5.5.23"
+	providedCompile "javax.servlet:servlet-api:2.5"
+	providedCompile "mysql:mysql-connector-java:5.1.23"
+	
+	compile "org.slf4j:slf4j-api:1.7.2"
+	compile "org.slf4j:slf4j-log4j12:1.7.2"
+	compile "jstl:jstl:1.2"
+	
+	testCompile "junit:junit:4.+"
 	
 	compile "org.springframework:spring-core:3.2.1.RELEASE"
 	compile "org.springframework:spring-context:3.2.1.RELEASE"
 	compile "org.springframework:spring-context-support:3.2.1.RELEASE"
 	compile "org.springframework:spring-jdbc:3.2.1.RELEASE"
+	compile "org.springframework:spring-web:3.2.1.RELEASE"
+	compile "org.springframework:spring-webmvc:3.2.1.RELEASE"
 	
-	compile "org.quartz-scheduler:quartz:1.8.6"
+	compile "org.springframework.security:spring-security-core:3.1.3.RELEASE"
+	compile "org.springframework.security:spring-security-web:3.1.3.RELEASE"
+	compile "org.springframework.security:spring-security-config:3.1.3.RELEASE"
+	compile "org.springframework.security:spring-security-ldap:3.1.3.RELEASE"
 	
-	compile "org.mockito:mockito-all:1.9.5"
-	
-	compile "mysql:mysql-connector-java:5.1.23"
-	
-	compile "commons-dbcp:commons-dbcp:20030825.184428"
-	
-	compile "org.slf4j:slf4j-api:1.7.2"
-	compile "org.slf4j:slf4j-log4j12:1.7.2"
-	
-	testCompile "junit:junit:4.+"
-	
-	runtime "commons-pool:commons-pool:20030825.183949"
-	runtime files("C:/Program Files/IBM/SQLLIB/java/db2jcc.jar", "C:/Program Files/IBM/SQLLIB/java/db2jcc_license_cu.jar")
 }
 
 task wrapper(type: Wrapper) {
