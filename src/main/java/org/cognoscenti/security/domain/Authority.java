@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -15,8 +16,10 @@ public class Authority {
 	private String authority;
 	
 	@ManyToOne(optional=false)
-	@JoinColumn(name="USERNAME")
-	private User user;
+	@JoinTable(name="GROUP_AUTHORITIES", 
+			joinColumns=@JoinColumn(name="AUTHORITY", referencedColumnName="AUTHORITY"),
+			inverseJoinColumns=@JoinColumn(name="GROUP_ID", referencedColumnName="ID"))
+	private Group group;
 	
 	public Authority() { }
 
@@ -27,12 +30,12 @@ public class Authority {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-	
-	public User getUser() {
-		return user;
+
+	public Group getGroup() {
+		return group;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 }

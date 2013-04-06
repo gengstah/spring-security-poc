@@ -1,6 +1,6 @@
 package org.cognoscenti.security.domain;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,11 +21,11 @@ public class Group {
 	@Column(name="GROUP_NAME", length=50, nullable=false)
 	private String groupName;
 	
-	@OneToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="GROUP_AUTHORITIES", 
-				joinColumns=@JoinColumn(name="GROUP_ID", referencedColumnName="ID"),
-				inverseJoinColumns=@JoinColumn(name="AUTHORITY", referencedColumnName="AUTHORITY"))
-	private List<Authority> authorities;
+	@OneToMany(mappedBy="group", fetch=FetchType.EAGER)
+	private Set<Authority> authorities;
+	
+	@OneToMany(mappedBy="group", fetch=FetchType.EAGER)
+	private Set<User> users;
 	
 	public Group() { }
 
@@ -43,11 +41,19 @@ public class Group {
 		this.groupName = groupName;
 	}
 
-	public List<Authority> getAuthorities() {
+	public Set<Authority> getAuthorities() {
 		return authorities;
 	}
 
-	public void setAuthorities(List<Authority> authorities) {
+	public void setAuthorities(Set<Authority> authorities) {
 		this.authorities = authorities;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 }

@@ -9,6 +9,14 @@
 </head>
 <body>
 	<h1>Spring Security -- Proof of Concept</h1>
+	
+	<table>
+		<tr>
+			
+		</tr>
+	</table>
+	
+	
 	<a href="<c:url value='/logout' />">Log out</a>
 </body>
 </html>

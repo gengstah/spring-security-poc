@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="adminAccount" class="org.cognoscenti.security.domain.User">
+		<property name="username" value="admin" />
+		<property name="password">
+			<bean class="org.apache.catalina.realm.RealmBase" factory-method="Digest">
+				<constructor-arg index="0" value="admin" />
+				<constructor-arg index="1" value="MD5" />
+				<constructor-arg index="2" value="ISO-8859-1" />
+			</bean>
+		</property>
+		<property name="enabled" value="true" />
+		<property name="group" ref="adminGroup" />
+	</bean>
+	
+	<bean id="adminAuthority" class="org.cognoscenti.security.domain.Authority">
+		<property name="authority" value="ROLE_ADMINISTRATOR" />
+		<property name="group" ref="adminGroup" />
+	</bean>
+	
+	<bean id="adminGroup" class="org.cognoscenti.security.domain.Group">
+		<property name="groupName" value="ADMIN_GROUP" />
+		<property name="authorities">
+			 <list>
+			 	<ref bean="adminAuthority" />
+			 </list>
+		</property>
+		<property name="users">
+			<list>
+				<ref bean="adminAccount" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount" class="org.cognoscenti.security.domain.User">
+		<property name="username" value="user" />
+		<property name="password">
+			<bean class="org.apache.catalina.realm.RealmBase" factory-method="Digest">
+				<constructor-arg index="0" value="user" />
+				<constructor-arg index="1" value="MD5" />
+				<constructor-arg index="2" value="ISO-8859-1" />
+			</bean>
+		</property>
+		<property name="enabled" value="true" />
+		<property name="group" ref="userGroup" />
+	</bean>
+	
+	<bean id="userAuthority" class="org.cognoscenti.security.domain.Authority">
+		<property name="authority" value="ROLE_USER" />
+		<property name="group" ref="userGroup" />
+	</bean>
+	
+	<bean id="userGroup" class="org.cognoscenti.security.domain.Group">
+		<property name="groupName" value="USER_GROUP" />
+		<property name="authorities">
+			 <list>
+			 	<ref bean="userAuthority" />
+			 </list>
+		</property>
+		<property name="users">
+			<list>
+				<ref bean="userAccount" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="org.cognoscenti.security.startup.StartUp" />
+</beans>

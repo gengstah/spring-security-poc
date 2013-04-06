@@ -3,6 +3,9 @@ package org.cognoscenti.security.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +20,12 @@ public class User {
 	
 	@Column(nullable=false)
 	private Boolean enabled;
+	
+	@ManyToOne(optional=false)
+	@JoinTable(name="GROUP_MEMBERS",
+			joinColumns=@JoinColumn(name="USERNAME", referencedColumnName="USERNAME"),
+			inverseJoinColumns=@JoinColumn(name="GROUP_ID", referencedColumnName="ID"))
+	private Group group;
 	
 	public User() { }
 	
@@ -42,5 +51,13 @@ public class User {
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 }

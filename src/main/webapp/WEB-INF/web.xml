@@ -19,6 +19,7 @@
             classpath:applicationContext-security.xml
             classpath:applicationContext-orm.xml
             classpath:applicationContext-tx.xml
+            classpath:applicationContext-startup.xml
         </param-value>
     </context-param>
   
