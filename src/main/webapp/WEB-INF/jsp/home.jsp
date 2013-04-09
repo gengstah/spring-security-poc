@@ -12,8 +12,15 @@
 	
 	<table>
 		<tr>
-			
+			<td><spring:message code="id" /> </td>
+			<td><spring:message code="group" /> </td>
 		</tr>
+		<c:forEach items="${ groups }" var="group">
+			<tr>
+				<td> <c:out value="${ group.id }" /> </td>
+				<td> <c:out value="${ group.groupName }" /> </td>
+			</tr>
+		</c:forEach>
 	</table>
 	
 	

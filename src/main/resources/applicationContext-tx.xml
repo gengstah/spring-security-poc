@@ -8,14 +8,15 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 		http://www.springframework.org/schema/aop 
         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+        
     <bean id="transactionManager" 
 			class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="emf" />
     </bean>
     
-    <!-- <aop:config>
-    	<aop:pointcut id="complaintManagerServiceOperation" expression="execution(* * ..ComplaintManager.*(..))"  />
-        <aop:advisor pointcut-ref="complaintManagerServiceOperation" advice-ref="txAdvice"/>
+    <aop:config>
+    	<aop:pointcut id="authenticationManagerServiceOperation" expression="execution(* org.cognoscenti.manager.*.*(..))"  />
+        <aop:advisor pointcut-ref="authenticationManagerServiceOperation" advice-ref="txAdvice"/>
     </aop:config>
 
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
@@ -25,5 +26,5 @@
             <tx:method name="remove*" />
             <tx:method name="*" read-only="true" />
         </tx:attributes>
-    </tx:advice> -->
+    </tx:advice>
 </beans>
